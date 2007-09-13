@@ -17,14 +17,14 @@ use MT::Blog;
 our $VERSION = '0.01';
 
 my $plugin = __PACKAGE__->new({
-    id => 'blog_skeleton_cloner',
-    name => 'BlogSkeletonCloner',
+    id          => 'blog_skeleton_cloner',
+    name        => 'BlogSkeletonCloner',
     description => q(<MT_TRANS phrase="Clones a weblog except for its contents.">),
-    doc_link => 'http://code.as-is.net/wiki/BlogSkeletonCloner',
+    doc_link    => 'http://code.as-is.net/wiki/BlogSkeletonCloner',
     author_name => 'Hirotaka Ogawa',
     author_link => 'http://profile.typekey.com/ogawa/',
-    version => $VERSION,
-    l10n_class => 'BlogSkeletonCloner::L10N',
+    version     => $VERSION,
+    l10n_class  => 'BlogSkeletonCloner::L10N',
 });
 MT->add_plugin($plugin);
 
@@ -35,11 +35,12 @@ sub init_registry {
 	    cms => {
 		list_actions => {
 		    blog => {
-			skeleton_clone_blog => {
-			    label      => $plugin->translate('Clone Blog (Skeleton)'),
-			    code       => \&clone_blog,
-			    permission => 'administer',
-			    max        => 4,
+			clone_blog_skeleton => {
+			    label           => $plugin->translate('Clone Blog (Skeleton)'),
+			    continue_prompt => $plugin->translate('Are you sure you want to clone the selected blog(s)?'),
+			    code            => \&clone_blog,
+			    permission      => 'administer',
+			    max             => 4,
 			},
 		    },
 		},
